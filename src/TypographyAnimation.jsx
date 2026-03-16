@@ -52,10 +52,10 @@ export default function TypographyAnimation() {
       }, 400);
       return () => clearTimeout(timer);
     } else if (phase === 2) {
-      // Re-centering layout shift takes approx 600ms
+      // Re-centering layout shift takes approx 600ms, wait a bit longer before revealing HERE
       const timer = setTimeout(() => {
         setPhase(3);
-      }, 600);
+      }, 1400);
       return () => clearTimeout(timer);
     }
   }, [index, phase]);
