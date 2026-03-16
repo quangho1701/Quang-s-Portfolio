@@ -13,7 +13,7 @@ const SPRING_DURATION_ESTIMATE_MS = 800; // Estimated time for spring to settle
 const HOLD_DURATION_MS = 500; // 500ms static hold time requested
 const ENTRANCE_DELAY_MS = 1000; // 1000ms for static words to finish
 
-export default function TypographyAnimation() {
+export default function TypographyAnimation({ onComplete }) {
   const [index, setIndex] = useState(-1);
   const [phase, setPhase] = useState(0); 
   // Phase 0: Slot machine animation
@@ -57,8 +57,20 @@ export default function TypographyAnimation() {
         setPhase(3);
       }, 1400);
       return () => clearTimeout(timer);
+    } else if (phase === 3) {
+      // Hold "HERE" before transitioning out
+      const timer = setTimeout(() => {
+        setPhase(4);
+      }, 1500);
+      return () => clearTimeout(timer);
+    } else if (phase === 4) {
+      // Wait for dust fade out before mounting LandingPage
+      const timer = setTimeout(() => {
+        if (onComplete) onComplete();
+      }, 800);
+      return () => clearTimeout(timer);
     }
-  }, [index, phase]);
+  }, [index, phase, onComplete]);
 
   // Framer Motion variants for the static text stagger
   const containerVariants = {
@@ -110,17 +122,20 @@ export default function TypographyAnimation() {
               return (
                 <motion.span
                   key={i}
-                  layout
+                  layout={word === "Quang"}
+                  layoutId={word === "Quang" ? "brand-logo" : undefined}
                   variants={wordVariants}
-                  className="flex h-[1.3em] items-center whitespace-pre origin-left"
+                  className="flex h-[1.3em] items-center whitespace-pre origin-left z-10"
                 >
                   <motion.span
                     animate={
-                      phase >= 1 && isRemovable
+                      phase >= 4 && word !== "Quang"
+                        ? { opacity: 0, scale: 1.5, filter: "blur(10px)" }
+                        : phase >= 1 && isRemovable
                         ? { opacity: 0, scale: 0.9 }
-                        : { opacity: 1, scale: 1 }
+                        : { opacity: 1, scale: 1, filter: "blur(0px)" }
                     }
-                    transition={{ duration: 0.4 }}
+                    transition={{ duration: phase >= 4 ? 0.8 : 0.4 }}
                   >
                     {word}{" "}
                   </motion.span>
@@ -168,13 +183,17 @@ export default function TypographyAnimation() {
         )}
 
         {/* The "HERE" Reveal & Gradient */}
-        {phase === 3 && (
+        {phase >= 3 && (
           <motion.div
             layout
             initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            className="flex h-[1.3em] items-center whitespace-pre"
+            animate={
+              phase >= 4
+                ? { opacity: 0, scale: 1.5, filter: "blur(10px)", x: 0 }
+                : { opacity: 1, x: 0, scale: 1, filter: "blur(0px)" }
+            }
+            transition={{ duration: phase >= 4 ? 0.8 : 0.5, ease: "easeOut" }}
+            className="flex h-[1.3em] items-center whitespace-pre origin-left"
           >
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#0690D4] via-[#7CF122] to-[#FF00E5]">
               HERE
