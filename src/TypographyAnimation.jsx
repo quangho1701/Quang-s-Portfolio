@@ -1,6 +1,37 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
+function TextShimmer({
+  children,
+  className = "",
+  duration = 2,
+  spread = 2,
+}) {
+  const dynamicSpread = React.useMemo(() => {
+    return children.length * spread;
+  }, [children, spread]);
+
+  return (
+    <motion.span
+      className={`relative inline-block bg-[length:250%_100%,auto] bg-clip-text text-transparent [background-repeat:no-repeat,padding-box] ${className}`}
+      initial={{ backgroundPosition: "100% center" }}
+      animate={{ backgroundPosition: "0% center" }}
+      transition={{
+        repeat: Infinity,
+        duration,
+        ease: "linear",
+      }}
+      style={{
+        "--spread": `${dynamicSpread}px`,
+        "--shimmer-color": "#ffffff",
+        backgroundImage: `linear-gradient(90deg, rgba(255,255,255,0) calc(50% - var(--spread)), var(--shimmer-color), rgba(255,255,255,0) calc(50% + var(--spread))), linear-gradient(to right, #0690D4, #7CF122, #FF00E5)`,
+      }}
+    >
+      {children}
+    </motion.span>
+  );
+}
+
 const WORDS = [
   { text: "Funny", color: "#7CF122" },
   { text: "Cool", color: "#2962FF" },
@@ -195,9 +226,9 @@ export default function TypographyAnimation({ onComplete }) {
             transition={{ duration: phase >= 4 ? 0.8 : 0.5, ease: "easeOut" }}
             className="flex h-[1.3em] items-center whitespace-pre origin-left"
           >
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#0690D4] via-[#7CF122] to-[#FF00E5]">
+            <TextShimmer duration={2} spread={8}>
               HERE
-            </span>
+            </TextShimmer>
           </motion.div>
         )}
         
