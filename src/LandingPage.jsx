@@ -1,19 +1,20 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import ExperienceSection from './components/ExperienceSection';
 
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-white font-sans text-black overflow-x-hidden" style={{ fontFamily: 'Inter, -apple-system, sans-serif' }}>
       {/* Floating Pill Navigation */}
       <header className="fixed top-8 left-1/2 -translate-x-1/2 z-50">
-        <motion.nav 
+        <motion.nav
           initial={{ y: -50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           className="flex items-center justify-between px-6 py-3 min-w-[600px] rounded-full bg-white/70 backdrop-blur-xl border border-gray-200/50 shadow-[0_8px_30px_rgb(0,0,0,0.04)]"
         >
           {/* Logo (Left) */}
-          <motion.div 
+          <motion.div
             layoutId="brand-logo"
             className="text-lg font-bold tracking-tight whitespace-nowrap origin-left"
           >
@@ -37,7 +38,7 @@ export default function LandingPage() {
       {/* Split Hero Section */}
       <main className="max-w-7xl mx-auto px-8 pt-48 pb-24 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center min-h-[90vh]">
         {/* Left Column: Typography */}
-        <motion.div 
+        <motion.div
           initial="hidden"
           animate="visible"
           variants={{
@@ -49,7 +50,7 @@ export default function LandingPage() {
           }}
           className="flex flex-col space-y-6"
         >
-          <motion.h2 
+          <motion.h2
             variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }}
             className="text-4xl text-gray-400 font-medium"
           >
@@ -62,16 +63,16 @@ export default function LandingPage() {
             </h1>
           </motion.div>
 
-          <motion.p 
+          <motion.p
             variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }}
-            className="text-xl text-gray-500 font-normal max-w-md leading-relaxed"
+            className="text-xl text-gray-500 font-normal max-w-xl leading-relaxed"
           >
-            I'm a software engineer who is passionate about AI & Algorithms!
+            I’m the first Vietnamese student to receive the full-ride Chapman Scholarship at Purdue Fort Wayne! With over 6 years of competitive programming experience and a major in mathematics, I thrive in high-stakes competitions and love building algorithm-driven AI systems.
           </motion.p>
         </motion.div>
 
         {/* Right Column: 3D Placeholder */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
@@ -105,6 +106,8 @@ export default function LandingPage() {
           </div>
         </motion.div>
       </main>
+
+      <ExperienceSection />
     </div>
   );
 }
