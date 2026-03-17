@@ -17,7 +17,7 @@ export default function ExperienceItem({ experience }) {
             <h4 className="text-xl font-bold text-gray-900 tracking-tight">{experience.company}</h4>
             <div className="text-gray-600 font-medium text-sm">{experience.role}</div>
             <div className={`text-[10px] mt-1 font-bold tracking-wider uppercase ${experience.isCurrent ? 'text-green-600' : 'text-gray-500'}`}>
-              {experience.dateRange} {experience.location && `• ${experience.location}`}
+              {experience.dateRange} {experience.location && <span className="text-gray-600 ml-1">• {experience.location}</span>}
             </div>
           </div>
         </div>
@@ -27,16 +27,15 @@ export default function ExperienceItem({ experience }) {
       <div className="flex-1">
         <div className="hidden md:block mb-6">
           <h4 className="text-2xl font-bold text-gray-900 tracking-tight">{experience.company}</h4>
-          <div className="flex items-center gap-3 mt-1">
-            <span className="text-gray-700 font-medium">{experience.role}</span>
-            <span className="text-gray-300">•</span>
+          <div className="text-gray-700 font-medium mt-1">{experience.role}</div>
+          <div className="flex items-center gap-3 mt-1.5">
             <span className={`text-[11px] font-bold tracking-wider uppercase ${experience.isCurrent ? 'text-green-600' : 'text-gray-500'}`}>
               {experience.dateRange}
             </span>
             {experience.location && (
               <>
                 <span className="text-gray-300">•</span>
-                <span className="text-[11px] font-bold tracking-wider uppercase text-gray-400">{experience.location}</span>
+                <span className="text-[11px] font-bold tracking-wider uppercase text-gray-600">{experience.location}</span>
               </>
             )}
           </div>
