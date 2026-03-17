@@ -122,7 +122,7 @@ export default function TypographyAnimation({ onComplete }) {
               return (
                 <motion.span
                   key={i}
-                  layout={word === "Quang"}
+                  layout
                   layoutId={word === "Quang" ? "brand-logo" : undefined}
                   variants={wordVariants}
                   className="flex h-[1.3em] items-center whitespace-pre origin-left z-10"
