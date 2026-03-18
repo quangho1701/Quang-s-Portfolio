@@ -5,7 +5,7 @@ import InfiniteGallery from './components/ui/infinite-gallery';
 
 const galleryImages = [
   "https://i.postimg.cc/B6cnr3g4/Quang-Ho-Volunteer.png",
-  "https://i.postimg.cc/9f23v7Nb/z6567340031129-657d7b543f5bd01c478b636da7ec8459.jpg,
+  "https://i.postimg.cc/9f23v7Nb/z6567340031129-657d7b543f5bd01c478b636da7ec8459.jpg",
   "https://i.postimg.cc/KcH6mVH1/z6567340289869-12a36686c7a3e6aae8c6b5f83092aa1a.jpg",
   "https://i.postimg.cc/htBcq6X4/z6567357736285-31966aaa2732068a2554ff5a7258938b.jpg",
   "https://picsum.photos/seed/teamwork5/800/600",
