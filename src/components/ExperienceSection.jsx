@@ -8,7 +8,7 @@ export default function ExperienceSection() {
       <div className="max-w-3xl mb-16">
         <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 mb-6">Previous Experience</h2>
         <p className="text-xl sm:text-2xl text-gray-500 leading-relaxed">
-          Before moving into building with AI, I worked across growth, marketing, and education. Those experiences shaped how I think about products, people, and communication.
+          I’ve spent over 6 years obsessed with logic and algorithms through competitive programming. Now, I’m using that foundation to build AI-driven tools.
         </p>
       </div>
 
