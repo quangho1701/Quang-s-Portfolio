@@ -1,12 +1,24 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import ExperienceSection from './components/ExperienceSection';
+import InfiniteGallery from './components/ui/infinite-gallery';
+
+const galleryImages = [
+  "https://picsum.photos/seed/volunteer1/800/600",
+  "https://picsum.photos/seed/community2/800/600",
+  "https://picsum.photos/seed/groupwork3/800/600",
+  "https://picsum.photos/seed/photography4/800/600",
+  "https://picsum.photos/seed/teamwork5/800/600",
+  "https://picsum.photos/seed/education6/800/600",
+  "https://picsum.photos/seed/workshop7/800/600",
+  "https://picsum.photos/seed/project8/800/600",
+];
 
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-white font-sans text-black overflow-x-hidden" style={{ fontFamily: 'Inter, -apple-system, sans-serif' }}>
       {/* Floating Pill Navigation */}
-      <header className="fixed top-8 left-1/2 -translate-x-1/2 z-50">
+      <header className="absolute top-8 left-1/2 -translate-x-1/2 z-50">
         <motion.nav
           initial={{ y: -50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -108,6 +120,19 @@ export default function LandingPage() {
       </main>
 
       <ExperienceSection />
+
+      {/* Photography & Volunteering Gallery Section */}
+      <section className="overflow-hidden border-t border-gray-100 pt-12 pb-12">
+        <div className="max-w-7xl mx-auto px-8 mb-12">
+          <h2 className="text-4xl font-bold tracking-tight text-black mb-4">Gallery</h2>
+          <p className="text-xl text-gray-500 max-w-2xl">
+            A glimpse into my volunteering experiences and my passion for education.
+          </p>
+        </div>
+        <div className="h-[80vh] w-full relative">
+          <InfiniteGallery images={galleryImages} />
+        </div>
+      </section>
     </div>
   );
 }
