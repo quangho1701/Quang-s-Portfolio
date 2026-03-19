@@ -283,7 +283,10 @@ function GalleryScene({
 	useFrame((state, delta) => {
 		// Auto-play: gentle forward drift
 		if (autoPlayRef.current) {
-			scrollVelocityRef.current += 0.2 * delta;
+			scrollVelocityRef.current += 0.6 * delta;
+		} else {
+			// Slow drift while waiting for auto-play to resume
+			scrollVelocityRef.current += 0.10 * delta;
 		}
 		// Smooth damping
 		scrollVelocityRef.current *= 0.96;

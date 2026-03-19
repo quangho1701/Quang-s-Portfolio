@@ -5,5 +5,12 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    background-color: #FAFAFA;
+    color: #09090B;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Archivo', sans-serif;
   }
 }
