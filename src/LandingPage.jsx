@@ -1,7 +1,9 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowLeft } from 'lucide-react';
 import ExperienceSection from './components/ExperienceSection';
 import { AnimatedFolder } from './components/3d-folder';
+import { ProjectCard } from './components/project-card';
 import InfiniteGallery from './components/ui/infinite-gallery';
 
 const personalProjects = {
@@ -10,17 +12,26 @@ const personalProjects = {
     {
       id: "web-1",
       image: "https://images.unsplash.com/photo-1547658719-da2b51169166?w=800&auto=format&fit=crop",
-      title: "Portfolio Site",
+      title: "Aero Landing Page",
+      description: "A comprehensive AI chatbot platform. This project focuses on the design and development of a user-friendly and visually appealing landing page.",
+      link: "#",
+      linkText: "View Project",
     },
     {
       id: "web-2",
       image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&auto=format&fit=crop",
-      title: "Dev Dashboard",
+      title: "Dreamland App Concept",
+      description: "A dreamy mobile app prototype designed for mindfulness and relaxation, featuring calming animations and a serene user interface.",
+      link: "#",
+      linkText: "Explore Concept",
     },
     {
       id: "web-3",
       image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&auto=format&fit=crop",
-      title: "Code Editor UI",
+      title: "Quantum Analytics Dashboard",
+      description: "A data visualization tool for quantum computing experiments, providing real-time insights and complex data analysis.",
+      link: "#",
+      linkText: "View Project",
     },
   ],
 };
@@ -28,9 +39,7 @@ const personalProjects = {
 const galleryImages = [
   "https://i.postimg.cc/B6cnr3g4/Quang-Ho-Volunteer.png",
   "https://i.postimg.cc/RFsZSRkC/IMG-5457.jpg",
-
   "https://i.postimg.cc/KcH6mVH1/z6567340289869-12a36686c7a3e6aae8c6b5f83092aa1a.jpg",
-
   "https://i.postimg.cc/QNYFh8DB/IMG-5449.jpg",
   "https://i.postimg.cc/9f23v7Nb/z6567340031129-657d7b543f5bd01c478b636da7ec8459.jpg",
   "https://i.postimg.cc/sDt1GT1L/IMG-5453.jpg",
@@ -39,7 +48,29 @@ const galleryImages = [
   "https://i.postimg.cc/zDQG4xw0/IMG-5458.jpg"
 ];
 
+const cardVariants = {
+  hidden: { opacity: 0, y: 60, scale: 0.85 },
+  visible: { opacity: 1, y: 0, scale: 1 },
+};
+
+const cardTransition = {
+  type: "spring",
+  stiffness: 80,
+  damping: 14,
+  mass: 0.8,
+};
+
 export default function LandingPage() {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const handleFolderClick = () => {
+    setTimeout(() => setIsExpanded(true), 480);
+  };
+
+  const handleCollapse = () => {
+    setIsExpanded(false);
+  };
+
   return (
     <div className="min-h-screen bg-transparent text-[#09090B] overflow-x-hidden">
       {/* Floating Pill Navigation */}
@@ -50,7 +81,6 @@ export default function LandingPage() {
           transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           className="flex items-center justify-between px-6 py-3 min-w-[600px] rounded-full bg-white/70 backdrop-blur-xl border border-gray-200/50 shadow-[0_8px_30px_rgb(0,0,0,0.04)]"
         >
-          {/* Logo (Left) */}
           <motion.div
             layoutId="brand-logo"
             className="text-lg font-bold tracking-tight whitespace-nowrap origin-left"
@@ -58,14 +88,12 @@ export default function LandingPage() {
             Quang Ho
           </motion.div>
 
-          {/* Links (Center) */}
           <div className="flex space-x-8 text-sm font-medium text-[#3F3F46]">
             <a href="#about" className="hover:text-[#18181B] transition-colors duration-200 cursor-pointer">About</a>
             <a href="#competitions" className="hover:text-[#18181B] transition-colors duration-200 cursor-pointer">Competitions</a>
             <a href="#experiences" className="hover:text-[#18181B] transition-colors duration-200 cursor-pointer">Experiences</a>
           </div>
 
-          {/* CTA Button (Right) */}
           <button className="px-5 py-2 text-sm font-medium text-[#09090B] border border-gray-200 rounded-full hover:bg-gray-100 transition-all duration-300 cursor-pointer">
             Contact
           </button>
@@ -74,7 +102,6 @@ export default function LandingPage() {
 
       {/* Split Hero Section */}
       <main className="max-w-7xl mx-auto px-8 pt-28 pb-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center min-h-[75vh]">
-        {/* Left Column: Typography */}
         <motion.div
           initial="hidden"
           animate="visible"
@@ -104,18 +131,16 @@ export default function LandingPage() {
             variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } } }}
             className="text-xl text-[#3F3F46] font-normal max-w-xl leading-relaxed"
           >
-            I’m the first Vietnamese student to receive the full-ride Chapman Scholarship at Purdue Fort Wayne! With over 6 years of competitive programming experience and a major in mathematics, I thrive in high-stakes competitions and love building algorithm-driven AI systems.
+            I'm the first Vietnamese student to receive the full-ride Chapman Scholarship at Purdue Fort Wayne! With over 6 years of competitive programming experience and a major in mathematics, I thrive in high-stakes competitions and love building algorithm-driven AI systems.
           </motion.p>
         </motion.div>
 
-        {/* Right Column: 3D Placeholder */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="w-full h-[600px] rounded-[2rem] relative overflow-hidden group shadow-[0_8px_30px_rgb(0,0,0,0.08)]"
         >
-
           <img 
             src="https://i.postimg.cc/B6cnr3g4/Quang-Ho-Volunteer.png" 
             alt="Quang Ho Volunteering"
@@ -137,20 +162,94 @@ export default function LandingPage() {
             className="mb-12"
           >
             <h2 className="text-4xl font-bold tracking-tight text-[#18181B] mb-4 font-['Archivo']">Projects</h2>
-            <p className="text-xl text-[#3F3F46] max-w-2xl">
-              Hover over each folder to explore projects. Click a card to view the full preview.
-            </p>
+            <AnimatePresence mode="wait">
+              <motion.p
+                key={isExpanded ? "expanded" : "collapsed"}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.3 }}
+                className="text-xl text-[#3F3F46] max-w-2xl"
+              >
+                {isExpanded
+                  ? "Here are my personal projects. Click a card to learn more."
+                  : "Hover over the folder to peek inside, then click to explore."}
+              </motion.p>
+            </AnimatePresence>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 32 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-            className="flex justify-center"
-          >
-            <AnimatedFolder title={personalProjects.title} projects={personalProjects.projects} />
-          </motion.div>
+          <AnimatePresence mode="wait">
+            {!isExpanded ? (
+              <motion.div
+                key="folder-view"
+                initial={{ opacity: 0, y: 32 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, transition: { duration: 0 } }}
+                transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+                className="flex justify-center"
+              >
+                <AnimatedFolder
+                  title={personalProjects.title}
+                  projects={personalProjects.projects}
+                  onFolderClick={handleFolderClick}
+                />
+              </motion.div>
+            ) : (
+              <motion.div
+                key="cards-view"
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
+                variants={{
+                  hidden: {},
+                  visible: {
+                    transition: { staggerChildren: 0.1, delayChildren: 0.04 }
+                  }
+                }}
+              >
+                {/* Collapse button */}
+                <motion.button
+                  variants={{
+                    hidden: { opacity: 0, x: -16 },
+                    visible: { opacity: 1, x: 0 }
+                  }}
+                  transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                  onClick={handleCollapse}
+                  className="inline-flex items-center gap-2 mb-8 text-sm font-medium text-[#3F3F46] hover:text-[#18181B] transition-colors duration-200 cursor-pointer group"
+                >
+                  <ArrowLeft className="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-1" />
+                  Back to folder
+                </motion.button>
+
+                {/* Cards grid */}
+                <motion.div
+                  variants={{
+                    hidden: {},
+                    visible: {
+                      transition: { staggerChildren: 0.12 }
+                    }
+                  }}
+                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+                >
+                  {personalProjects.projects.map((project) => (
+                    <motion.div
+                      key={project.id}
+                      variants={cardVariants}
+                      transition={cardTransition}
+                    >
+                      <ProjectCard
+                        imgSrc={project.image}
+                        title={project.title}
+                        description={project.description}
+                        link={project.link}
+                        linkText={project.linkText}
+                      />
+                    </motion.div>
+                  ))}
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </section>
 
