@@ -1,7 +1,29 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import ExperienceSection from './components/ExperienceSection';
+import { AnimatedFolder } from './components/3d-folder';
 import InfiniteGallery from './components/ui/infinite-gallery';
+
+const personalProjects = {
+  title: "Personal Projects",
+  projects: [
+    {
+      id: "web-1",
+      image: "https://images.unsplash.com/photo-1547658719-da2b51169166?w=800&auto=format&fit=crop",
+      title: "Portfolio Site",
+    },
+    {
+      id: "web-2",
+      image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&auto=format&fit=crop",
+      title: "Dev Dashboard",
+    },
+    {
+      id: "web-3",
+      image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&auto=format&fit=crop",
+      title: "Code Editor UI",
+    },
+  ],
+};
 
 const galleryImages = [
   "https://i.postimg.cc/B6cnr3g4/Quang-Ho-Volunteer.png",
@@ -103,6 +125,34 @@ export default function LandingPage() {
       </main>
 
       <ExperienceSection />
+
+      {/* Projects Section */}
+      <section className="border-t border-gray-100 pt-16 pb-16">
+        <div className="max-w-7xl mx-auto px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="mb-12"
+          >
+            <h2 className="text-4xl font-bold tracking-tight text-[#18181B] mb-4 font-['Archivo']">Projects</h2>
+            <p className="text-xl text-[#3F3F46] max-w-2xl">
+              Hover over each folder to explore projects. Click a card to view the full preview.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 32 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            className="flex justify-center"
+          >
+            <AnimatedFolder title={personalProjects.title} projects={personalProjects.projects} />
+          </motion.div>
+        </div>
+      </section>
 
       {/* Photography & Volunteering Gallery Section */}
       <section className="overflow-hidden border-t border-gray-100 pt-12 pb-12">
