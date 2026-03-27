@@ -11,10 +11,11 @@ const personalProjects = {
   projects: [
     {
       id: "web-1",
-      image: "https://images.unsplash.com/photo-1547658719-da2b51169166?w=800&auto=format&fit=crop",
-      title: "Aero Landing Page",
-      description: "A comprehensive AI chatbot platform. This project focuses on the design and development of a user-friendly and visually appealing landing page.",
-      link: "#",
+      image: "/whos-the-killer.png",
+      title: "Who's The Killer?",
+      description:
+        "A tension-filled, top-down survival horror game with sketchbook graphics. In a crowded masquerade bar, a killer has just removed their mask to hunt you down. You have 30 seconds to navigate the shadows using only a narrow flashlight beam. Find the exit, weave through the crowd, and whatever you do: don't bump into the face without a mask.",
+      link: "https://globalgamejam.org/games/2026/whos-killer-1",
       linkText: "View Project",
     },
     {
