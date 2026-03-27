@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft } from 'lucide-react';
 import ExperienceSection from './components/ExperienceSection';
 import { AnimatedFolder } from './components/3d-folder';
 import { ProjectCard } from './components/project-card';
 import InfiniteGallery from './components/ui/infinite-gallery';
+import SiteNav from './components/SiteNav';
 
 const personalProjects = {
   title: "Personal Projects",
@@ -63,6 +64,17 @@ const cardTransition = {
 
 export default function LandingPage() {
   const [isExpanded, setIsExpanded] = useState(false);
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (!hash || hash.startsWith('#/')) return;
+    const id = hash.slice(1);
+    const el = document.getElementById(id);
+    if (el) {
+      requestAnimationFrame(() => {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+  }, []);
 
   const handleFolderClick = () => {
     setTimeout(() => setIsExpanded(true), 480);
@@ -74,35 +86,13 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen bg-transparent text-[#09090B] overflow-x-hidden">
-      {/* Floating Pill Navigation */}
-      <header className="absolute top-4 left-1/2 -translate-x-1/2 z-50">
-        <motion.nav
-          initial={{ y: -50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="flex items-center justify-between px-6 py-3 min-w-[600px] rounded-full bg-white/70 backdrop-blur-xl border border-gray-200/50 shadow-[0_8px_30px_rgb(0,0,0,0.04)]"
-        >
-          <motion.div
-            layoutId="brand-logo"
-            className="text-lg font-bold tracking-tight whitespace-nowrap origin-left"
-          >
-            Quang Ho
-          </motion.div>
-
-          <div className="flex space-x-8 text-sm font-medium text-[#3F3F46]">
-            <a href="#about" className="hover:text-[#18181B] transition-colors duration-200 cursor-pointer">About</a>
-            <a href="#competitions" className="hover:text-[#18181B] transition-colors duration-200 cursor-pointer">Competitions</a>
-            <a href="#experiences" className="hover:text-[#18181B] transition-colors duration-200 cursor-pointer">Experiences</a>
-          </div>
-
-          <button className="px-5 py-2 text-sm font-medium text-[#09090B] border border-gray-200 rounded-full hover:bg-gray-100 transition-all duration-300 cursor-pointer">
-            Contact
-          </button>
-        </motion.nav>
-      </header>
+      <SiteNav />
 
       {/* Split Hero Section */}
-      <main className="max-w-7xl mx-auto px-8 pt-28 pb-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center min-h-[75vh]">
+      <main
+        id="about"
+        className="max-w-7xl mx-auto px-8 pt-28 pb-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center min-h-[75vh]"
+      >
         <motion.div
           initial="hidden"
           animate="visible"

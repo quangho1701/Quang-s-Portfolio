@@ -55,25 +55,22 @@ export function AnimatedFolder({ title, projects, className, onFolderClick }) {
     <div
       className={cn(
         "relative flex flex-col items-center justify-center",
-        "p-8 rounded-2xl cursor-pointer",
+        "p-8 cursor-pointer",
         "transition-all duration-500 ease-out",
         "group",
-        !isExploding && "bg-card border border-border hover:shadow-2xl hover:shadow-accent/10 hover:border-accent/30",
-        isExploding && "border border-transparent",
         className
       )}
       style={{
         minWidth: "280px",
         minHeight: "320px",
         perspective: "1000px",
-        backgroundColor: isExploding ? "transparent" : undefined,
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => { if (!isExploding) setIsHovered(false) }}
       onClick={handleClick}
     >
       <div
-        className="absolute inset-0 rounded-2xl transition-opacity duration-500"
+        className="absolute inset-0 transition-opacity duration-500"
         style={{
           background: "radial-gradient(circle at 50% 70%, var(--accent) 0%, transparent 70%)",
           opacity: isExploding ? 0 : isHovered ? 0.08 : 0,
