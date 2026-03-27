@@ -2,8 +2,13 @@ import * as React from "react";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils"; // Assuming you have a cn utility for merging class names
 
+const isRealLink = (href) =>
+  typeof href === "string" && href.length > 0 && href !== "#";
+
 const ProjectCard = React.forwardRef(
   ({ className, imgSrc, title, description, link, linkText = "View Project", ...props }, ref) => {
+    const titleLinked = isRealLink(link);
+
     return (
       <div
         ref={ref}
@@ -22,9 +27,20 @@ const ProjectCard = React.forwardRef(
         </div>
         {/* Card Content Section */}
         <div className="flex flex-1 flex-col p-6">
-          <h3
-            className="text-xl font-semibold transition-colors duration-300 group-hover:text-primary">
-            {title}
+          <h3 className="text-xl font-semibold transition-colors duration-300 group-hover:text-primary">
+            {titleLinked ? (
+              <a
+                href={link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-inherit hover:underline underline-offset-4 decoration-primary/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {title}
+              </a>
+            ) : (
+              title
+            )}
           </h3>
           <p className="mt-3 flex-1 text-muted-foreground">{description}</p>
           
