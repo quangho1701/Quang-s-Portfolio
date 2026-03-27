@@ -11,7 +11,7 @@ const personalProjects = {
   projects: [
     {
       id: "web-1",
-      image: "/whos-the-killer.png",
+      image: "https://i.postimg.cc/mZjbQp5b/Start-Menu.png",
       title: "Who's The Killer?",
       description:
         "A tension-filled, top-down survival horror game with sketchbook graphics. In a crowded masquerade bar, a killer has just removed their mask to hunt you down. You have 30 seconds to navigate the shadows using only a narrow flashlight beam. Find the exit, weave through the crowd, and whatever you do: don't bump into the face without a mask.",
