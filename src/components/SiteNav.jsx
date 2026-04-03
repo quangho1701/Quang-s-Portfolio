@@ -38,6 +38,13 @@ export default function SiteNav() {
           </button>
           <button
             type="button"
+            onClick={() => navTo('#/film')}
+            className="hover:text-[#18181B] transition-colors duration-200 cursor-pointer bg-transparent border-none text-sm font-medium text-[#3F3F46]"
+          >
+            Film
+          </button>
+          <button
+            type="button"
             onClick={() => navTo('#experiences')}
             className="hover:text-[#18181B] transition-colors duration-200 cursor-pointer bg-transparent border-none text-sm font-medium text-[#3F3F46]"
           >

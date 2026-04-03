@@ -3,12 +3,14 @@ import { AnimatePresence } from 'framer-motion';
 import TypographyAnimation from './TypographyAnimation';
 import LandingPage from './LandingPage';
 import CompetitionsPage from './CompetitionsPage';
+import FilmPage from './FilmPage';
 
 const INTRO_KEY = 'portfolioIntroDone';
 
 function getPage() {
   const hash = window.location.hash;
   if (hash === '#/competitions') return 'competitions';
+  if (hash === '#/film') return 'film';
   return 'home';
 }
 
@@ -31,6 +33,10 @@ function App() {
 
   if (page === 'competitions') {
     return <CompetitionsPage />;
+  }
+
+  if (page === 'film') {
+    return <FilmPage />;
   }
 
   return (
