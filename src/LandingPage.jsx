@@ -21,11 +21,12 @@ const personalProjects = {
     },
     {
       id: "web-2",
-      image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&auto=format&fit=crop",
-      title: "Dreamland App Concept",
-      description: "A dreamy mobile app prototype designed for mindfulness and relaxation, featuring calming animations and a serene user interface.",
-      link: "#",
-      linkText: "Explore Concept",
+      image: "https://i.postimg.cc/QxsJzmsV/hero.jpg",
+      title: "Meet AI",
+      description:
+        "Practice sales pitches, job interviews, and negotiations with realistic AI personas through real-time video interactions.",
+      link: "https://meet-ai-dusky-gamma.vercel.app/",
+      linkText: "View Project",
     },
     {
       id: "web-3",
